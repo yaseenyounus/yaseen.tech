@@ -2,3 +2,9 @@
   name = "blog"
   pageRef = "blog"
   weight = 10
+
+[[main]]
+  name = "background"
+  pageRef = "background"
+  weight = 20
+

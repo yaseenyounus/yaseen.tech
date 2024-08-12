@@ -5,6 +5,8 @@ enableSearch = true
 enableCodeCopy = true
 defaultBackgroundImage = "data-flow.jpg"
 defaultFeaturedImage = "triangle-colors.png"
+highlightCurrentMenuArea = true
+smartTOC = true
 
 [header]
 layout = "basic"
@@ -12,7 +14,7 @@ layout = "basic"
 [footer]
 showCopyright = true
 showThemeAttribution = false
-showAppearanceSwitcher = true
+showAppearanceSwitcher = false
 showScrollToTop = true
 showMenu = true
 
