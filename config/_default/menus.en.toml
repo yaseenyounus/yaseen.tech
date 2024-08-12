@@ -4,12 +4,21 @@
   weight = 1
 
 [[main]]
-  name = "blog"
-  pageRef = "/blog"
-  weight = 10
-
-[[main]]
   name = "background"
   pageRef = "/background"
-  weight = 20
+  weight = 10
 
+# [[main]]
+#   name = "certifications"
+#   pageRef = "/certifications"
+#   weight = 20
+
+# [[main]]
+#   name = "publications"
+#   pageRef = "/publications"
+#   weight = 30
+
+[[main]]
+  name = "blog"
+  pageRef = "/blog"
+  weight = 40
