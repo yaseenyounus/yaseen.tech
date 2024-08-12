@@ -31,14 +31,14 @@ showMoreLinkDest = "/blog"
 cardView = false
 cardViewScreenWidth = false
 layoutBackgroundBlur = true
-homepageImage = "data-flow.jpg"
+homepageImage = "ripples.svg"
 
 [article]
 showDate = true
 showDateUpdated = false
 showAuthor = true
 showHero = true
-heroStyle = "basic"
+heroStyle = "background"
 showBreadcrumbs = true
 showDraftLabel = true
 showEdit = false

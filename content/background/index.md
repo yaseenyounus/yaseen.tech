@@ -1,5 +1,7 @@
 +++
 title = "Background"
+description = "Discover my educational journey and professional experience. Explore my qualifications, skills, and accomplishments that have shaped my career path."
+heroStyle = "background"
 showDate = false
 showAuthor = false
 showWordCount = false

@@ -9,8 +9,8 @@ isoCode = "en"
 rtl = false
 description = "My awesome website"
 dateFormat = "2 January 2006"
-logo = " "
-secondaryLogo = " "
+logo = "yt.png"
+secondaryLogo = "yt.png"
 
 [author]
 name = "Yaseen Younus"
