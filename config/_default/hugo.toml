@@ -1,5 +1,5 @@
 theme = "blowfish"
-baseURL = "https://localhost:1313"
+baseURL = "https://yaseen.tech"
 defaultContentLanguage = "en"
 enableRobotsTXT = true
 paginate = 20
