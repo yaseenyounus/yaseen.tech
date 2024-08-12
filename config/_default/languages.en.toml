@@ -15,6 +15,9 @@ secondaryLogo = "yt.png"
 [author]
 name = "Yaseen Younus"
 image = "yaseen-black-bg.png"
-headline = "personal site & tech blog"
-bio = "# Cloud | DevOps | SRE | Architecture | Automation"
+headline = """
+personal site & tech blog  
+Cloud | DevOps | SRE | Platform | Architecture | Automation
+"""
+bio = "Cloud | DevOps | SRE | Architecture | Automation"
 links = [ { email = "" }, { github = "https://github.com/yaseenyounus" }, { linkedin = "https://www.linkedin.com/in/yaseenyounus/" } ]
