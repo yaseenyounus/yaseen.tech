@@ -6,6 +6,7 @@ showDate = false
 showAuthor = false
 showWordCount = false
 showReadingTime = false
+showTableOfContents = false
 +++
 
 ## Professional Experience

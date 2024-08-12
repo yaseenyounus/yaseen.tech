@@ -9,11 +9,11 @@ isoCode = "en"
 rtl = false
 description = "My awesome website"
 dateFormat = "2 January 2006"
-logo = "yt.png"
+logo = "img/yt.png"
 
 [author]
 name = "Yaseen Younus"
-image = "yaseen-black-bg.png"
+image = "img/yaseen-black-bg.png"
 headline = """
 personal site & tech blog  
 Cloud | DevOps | SRE | Platform | Architecture | Automation

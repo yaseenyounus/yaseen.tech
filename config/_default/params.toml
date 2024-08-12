@@ -3,8 +3,8 @@ defaultAppearance = "dark"
 autoSwitchAppearance = false
 enableSearch = true
 enableCodeCopy = true
-defaultBackgroundImage = "data-flow.jpg"
-defaultFeaturedImage = "triangle-colors.png"
+defaultBackgroundImage = "img/data-flow.jpg"
+defaultFeaturedImage = "img/triangle-colors.png"
 highlightCurrentMenuArea = true
 smartTOC = true
 smartTOCHideUnfocusedChildren = false
@@ -31,7 +31,7 @@ showMoreLinkDest = "/blog"
 cardView = false
 cardViewScreenWidth = false
 layoutBackgroundBlur = true
-homepageImage = "ripples.svg"
+homepageImage = "img/ripples.svg"
 
 [article]
 showDate = true
