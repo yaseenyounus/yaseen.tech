@@ -1,0 +1,79 @@
+colorScheme = "forest"
+defaultAppearance = "dark"
+autoSwitchAppearance = false
+enableSearch = true
+enableCodeCopy = true
+defaultBackgroundImage = "img/data-flow.jpg"
+defaultFeaturedImage = "img/triangle-colors.png"
+highlightCurrentMenuArea = true
+smartTOC = true
+smartTOCHideUnfocusedChildren = false
+
+[header]
+layout = "fixed"
+
+[background]
+layout = "page"
+
+[footer]
+showCopyright = true
+showThemeAttribution = false
+showAppearanceSwitcher = false
+showScrollToTop = true
+showMenu = true
+
+[homepage]
+layout = "background"
+showRecent = true
+showRecentItems = 5
+showMoreLink = true
+showMoreLinkDest = "/blog"
+cardView = false
+cardViewScreenWidth = false
+layoutBackgroundBlur = true
+homepageImage = "img/ripples.svg"
+
+[article]
+showDate = true
+showDateUpdated = false
+showAuthor = true
+showHero = true
+heroStyle = "background"
+showBreadcrumbs = true
+showDraftLabel = true
+showEdit = false
+editAppendPath = true
+seriesOpened = false
+showHeadingAnchors = true
+showPagination = true
+invertPagination = false
+showReadingTime = true
+showTableOfContents = true
+showTaxonomies = false
+showAuthorsBadges = true
+showWordCount = true
+showSummary = true
+sharingLinks = [ "linkedin", "twitter", "whatsapp", "pinterest", "reddit", "facebook", "email" ]
+
+[list]
+showBreadcrumbs = false
+showSummary = true
+showTableOfContents = false
+showCards = false
+groupByYear = true
+cardView = false
+cardViewScreenWidth = false
+
+[sitemap]
+excludedKinds = []
+
+[taxonomy]
+showTermCount = true
+heroStyle = ""
+cardView = true
+
+[firebase]
+
+[fathomAnalytics]
+
+[verification]
