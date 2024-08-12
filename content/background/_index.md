@@ -1,5 +1,0 @@
-# Background
-
-## Experience
-
-## Education

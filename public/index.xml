@@ -30,5 +30,17 @@ This is a heading # This is a subheading # This is a subsubheading # This is a s
       <media:content xmlns:media="http://search.yahoo.com/mrss/" url="//localhost:1313/blog/01-hello-world/featured.png" />
     </item>
     
+    <item>
+      <title></title>
+      <link>//localhost:1313/background/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/background/</guid>
+      <description>Background # Professional Experience # Sr. DevSecOps Engineer # Eutelsat OneWeb | Contract # Location: Remote | Chicago, IL
+Duration: August 2023 - Present
+DevOps Engineer # Amazon Web Services | Full-time # Location: Remote | Chicago, IL</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="//localhost:1313/background/featured.jpg" />
+    </item>
+    
   </channel>
 </rss>

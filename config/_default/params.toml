@@ -11,6 +11,9 @@ smartTOC = true
 [header]
 layout = "basic"
 
+[background]
+layout = "page"
+
 [footer]
 showCopyright = true
 showThemeAttribution = false
