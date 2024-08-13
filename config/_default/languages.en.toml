@@ -9,16 +9,16 @@ isoCode = "en"
 rtl = false
 description = "My awesome website"
 dateFormat = "2 January 2006"
-logo = "img/yt.png"
+logo = "img/yt-logo-125x125.png"
 
 [author]
 name = "Yaseen Younus"
 image = "img/yaseen-black-bg.png"
 headline = """
-personal site & tech blog  
+Personal Site & Tech Blog<br><br>
 Cloud | DevOps | SRE | Platform | Architecture | Automation
 """
-bio = "Cloud | DevOps | SRE | Architecture | Automation"
+bio = "Personal site and tech blog"
 links = [ 
     { email = "mailto:yaseenyounus1@gmail.com" }, 
     { github = "https://github.com/yaseenyounus" }, 
