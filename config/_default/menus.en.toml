@@ -1,24 +1,24 @@
 [[main]]
-  name = "home"
+  name = "Home"
   pageRef = "/"
   weight = 1
 
 [[main]]
-  name = "background"
+  name = "Background"
   pageRef = "/background"
   weight = 10
 
 # [[main]]
-#   name = "certifications"
+#   name = "Certifications"
 #   pageRef = "/certifications"
 #   weight = 20
 
 # [[main]]
-#   name = "publications"
+#   name = "Publications"
 #   pageRef = "/publications"
 #   weight = 30
 
 [[main]]
-  name = "blog"
+  name = "Blog"
   pageRef = "/blog"
   weight = 40

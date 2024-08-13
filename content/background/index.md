@@ -7,29 +7,34 @@ showAuthor = false
 showWordCount = false
 showReadingTime = false
 showTableOfContents = false
+sharingLinks = [""]
 +++
 
 ## Professional Experience
 
-### Sr. DevSecOps Engineer | [Eutelsat OneWeb](https://oneweb.net/)
+### Sr. DevSecOps Engineer
 
-**Location:** Remote | Chicago, IL  
-**Duration:** August 2023 - Present
+[Eutelsat OneWeb](https://oneweb.net/)  
+August 2023 - Present  
+Chicago, IL | Remote
 
-### DevOps Engineer | [Amazon Web Services](https://aws.amazon.com/)
+### DevOps Engineer
 
-**Location:** Remote | Chicago, IL  
-**Duration:** September 2022 - June 2023
+[Amazon Web Services (AWS)](https://aws.amazon.com/)  
+September 2022 - June 2023  
+Chicago, IL | Remote
 
-### Site Reliability Engineer | [Everbridge](https://www.everbridge.com/)
+### Site Reliability Engineer
 
-**Location:** Remote | Chicago, IL  
-**Duration:** May 2021 - September 2022
+[Everbridge](https://www.everbridge.com/)  
+May 2021 - September 2022  
+Chicago, IL | Remote
 
-### DevOps / Platform Engineer | [Abbott](https://www.abbott.com/)
+### DevOps / Platform Engineer
 
-**Location:** On-site | North Chicago, IL  
-**Duration:** June 2018 - May 2021
+[Abbott](https://www.abbott.com/)  
+June 2018 - May 2021  
+North Chicago, IL | On-site
 
 ---
 
