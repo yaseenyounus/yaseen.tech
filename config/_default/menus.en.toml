@@ -8,10 +8,10 @@
   pageRef = "/background"
   weight = 10
 
-# [[main]]
-#   name = "Certifications"
-#   pageRef = "/certifications"
-#   weight = 20
+[[main]]
+  name = "Certifications"
+  pageRef = "/certifications"
+  weight = 20
 
 # [[main]]
 #   name = "Publications"
