@@ -10,11 +10,12 @@ showTableOfContents = false
 sharingLinks = [""]
 +++
 
-| Certification                                    | Image                                                                         |
-| ------------------------------------------------ | ----------------------------------------------------------------------------- |
-| AWS Certified Solutions Architect - Professional | <img src="img/aws-sa-pro.png" alt="Certification 1" width="125"/>             |
-| AWS Certified DevOps Engineer - Professional     | <img src="img/aws-devops-pro.png" alt="Certification 2" width="125"/>         |
-| AWS Certified Security Specialty                 | <img src="img/aws-security-specialty.png" alt="Certification 3" width="125"/> |
-| AWS Certified Solution Architect Associate       | <img src="img/aws-sa-associate.png" alt="Certification 3" width="125"/>       |
-| AWS Certified SysOps Administrator Associate     | <img src="img/aws-sysops-associate.png" alt="Certification 3" width="125"/>   |
-| AWS Certified Developer Associate                | <img src="img/aws-dev-associate.png" alt="Certification 3" width="125"/>      |
+|                                                 |                                         |                                                   |
+| ----------------------------------------------- | --------------------------------------- | ------------------------------------------------- |
+| ![](img/aws-sa-pro.png)                         | ![](img/aws-devops-pro.png)             | ![](img/aws-security-specialty.png)               |
+| ![](img/aws-sa-associate.png)                   | ![](img/aws-sysops-associate.png)       | ![](img/aws-dev-associate.png)                    |
+| ![](img/aws-cloud-practitioner.png)             | ![](img/aws-knowledge-architecture.png) | ![](img/aws-knowledge-cloud-essentials.png)       |
+| ![](img/aws-cloud-quest-security.png)           | ![](img/aws-cloud-quest-sa.png)         | ![](img/aws-cloud-quest-serverless-developer.png) |
+| ![](img/aws-cloud-quest-cloud-practitioner.png) | ![](img/terraform-certified.png)        | ![](img/pcep-entry-level.png)                     |
+
+[Credly Profile](https://www.credly.com/users/yaseenyounus)
