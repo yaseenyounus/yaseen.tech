@@ -3,7 +3,7 @@ defaultAppearance = "dark"
 autoSwitchAppearance = false
 enableSearch = true
 enableCodeCopy = true
-defaultBackgroundImage = "img/data-flow.jpg"
+defaultBackgroundImage = "img/ripples.svg"
 defaultFeaturedImage = "img/triangle-colors.png"
 highlightCurrentMenuArea = true
 smartTOC = true
@@ -39,6 +39,7 @@ showDateUpdated = false
 showAuthor = true
 showHero = true
 heroStyle = "background"
+layoutBackgroundHeaderSpace = false
 showBreadcrumbs = true
 showDraftLabel = true
 showEdit = false
@@ -56,6 +57,10 @@ showSummary = true
 sharingLinks = [ "linkedin", "twitter", "whatsapp", "pinterest", "reddit", "facebook", "email" ]
 
 [list]
+showHero = true
+heroStyle = "background" 
+layoutBackgroundBlur = true # only used when heroStyle equals background
+layoutBackgroundHeaderSpace = false
 showBreadcrumbs = false
 showSummary = true
 showTableOfContents = false
@@ -63,6 +68,23 @@ showCards = false
 groupByYear = true
 cardView = false
 cardViewScreenWidth = false
+
+# [list]
+#   showHero = true
+#   heroStyle = "background" # valid options: basic, big, background, thumbAndBackground
+#   layoutBackgroundBlur = true # only used when heroStyle equals background
+#   layoutBackgroundHeaderSpace = false
+#   showBreadcrumbs = false
+#   showSummary = true
+#   showViews = false
+#   showLikes = false
+#   showTableOfContents = false
+#   showCards = false
+#   orderByWeight = true
+#   groupByYear = true
+#   cardView = true
+#   cardViewScreenWidth = false
+#   constrainItemsWidth = false
 
 [sitemap]
 excludedKinds = []
