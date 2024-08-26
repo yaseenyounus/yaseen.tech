@@ -1,5 +1,5 @@
 ---
-title: "AWS CDK Go - ECS Cluster With Application Load Balancer (ALB)"
+title: "AWS CDK Go - ECS Cluster with Application Load Balancer (ALB)"
 description: "AWS CDK Go example shared on GitHub demonstrates how to deploy an ECS cluster behind an ALB."
 draft: false
 date: 2023-03-16
