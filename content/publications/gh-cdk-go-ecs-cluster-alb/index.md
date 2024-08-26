@@ -12,4 +12,4 @@ externalUrl: "https://github.com/aws-samples/aws-cdk-examples/tree/master/go/ecs
 tags: ["aws", "cdk", "go"]
 ---
 
-AWS CDK (Cloud Development Kit) Go sample demonstrates how to configure and deploy an Elastic Container Service (ECS) Cluster behind an Application Load Balancer (ALB)
+AWS Cloud Development Kit (CDK) Go sample demonstrates how to configure and deploy an Elastic Container Service (ECS) Cluster behind an Application Load Balancer (ALB)

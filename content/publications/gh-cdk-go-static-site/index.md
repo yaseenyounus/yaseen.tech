@@ -12,6 +12,6 @@ externalUrl: "https://github.com/aws-samples/aws-cdk-examples/tree/main/go/stati
 tags: ["aws", "cdk", "go"]
 ---
 
-This AWS Cloud Development Kit (CDK) Go example demonstrates how to host a static site in an S3 Bucket and serve content using a CloudFront Distribution.
+AWS Cloud Development Kit (CDK) Go example demonstrates how to host a static site in an S3 Bucket and serve content using a CloudFront Distribution.
 
 This example allows you configure a Route 53 subdomain in an existing Hosted Zone that you control. The subdomain will be pointed to the CloudFront Distribution to access the static content.
