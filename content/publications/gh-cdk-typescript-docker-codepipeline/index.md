@@ -1,5 +1,5 @@
 ---
-title: "AWS CDK TypeScript - Build & Deploy Docker Image With AWS CodePipeline"
+title: "AWS CDK TypeScript - Build & Deploy Docker Image with AWS CodePipeline"
 description: "AWS CDK TypeScript example demonstrates how to configure AWS CodePipeline with CodeCommit, CodeBuild, and CodeDeploy to build and deploy a Docker image to an Elastic Container Service (ECS) cluster running AWS Fargate."
 draft: false
 date: 2023-04-10

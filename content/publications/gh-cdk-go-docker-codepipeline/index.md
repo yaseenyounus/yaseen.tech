@@ -1,5 +1,5 @@
 ---
-title: "AWS CDK Go - Build & Deploy Docker Image With AWS CodePipeline"
+title: "AWS CDK Go - Build & Deploy Docker Image with AWS CodePipeline"
 description: "AWS CDK Go example demonstrates how to configure AWS CodePipeline with CodeCommit, CodeBuild, and CodeDeploy to build and deploy a Docker image to an Elastic Container Service (ECS) cluster running AWS Fargate."
 draft: false
 date: 2023-04-04
