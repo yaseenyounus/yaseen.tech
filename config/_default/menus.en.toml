@@ -13,10 +13,10 @@
   pageRef = "/certifications"
   weight = 20
 
-# [[main]]
-#   name = "Publications"
-#   pageRef = "/publications"
-#   weight = 30
+[[main]]
+  name = "Publications"
+  pageRef = "/publications"
+  weight = 30
 
 [[main]]
   name = "Blog"
