@@ -68,23 +68,7 @@ showCards = false
 groupByYear = true
 cardView = false
 cardViewScreenWidth = false
-
-# [list]
-#   showHero = true
-#   heroStyle = "background" # valid options: basic, big, background, thumbAndBackground
-#   layoutBackgroundBlur = true # only used when heroStyle equals background
-#   layoutBackgroundHeaderSpace = false
-#   showBreadcrumbs = false
-#   showSummary = true
-#   showViews = false
-#   showLikes = false
-#   showTableOfContents = false
-#   showCards = false
-#   orderByWeight = true
-#   groupByYear = true
-#   cardView = true
-#   cardViewScreenWidth = false
-#   constrainItemsWidth = false
+constrainItemsWidth = false
 
 [sitemap]
 excludedKinds = []
