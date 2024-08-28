@@ -9,6 +9,8 @@ highlightCurrentMenuArea = true
 smartTOC = true
 smartTOCHideUnfocusedChildren = false
 
+mainSections = ["blog", "publications"]
+
 [header]
 layout = "fixed"
 
@@ -25,7 +27,7 @@ showMenu = true
 [homepage]
 layout = "background"
 showRecent = true
-showRecentItems = 5
+showRecentItems = 10
 showMoreLink = true
 showMoreLinkDest = "/blog"
 cardView = false
