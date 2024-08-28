@@ -14,6 +14,7 @@ logo = "img/yt-logo-125x125.png"
 [author]
 name = "Yaseen Younus"
 image = "img/yaseen-black-bg.png"
+email = "yaseenyounus1@gmail.com"
 headline = """
 Personal Site & Tech Blog<br><br>
 Cloud | DevOps | SRE | Platform | Architecture | Automation

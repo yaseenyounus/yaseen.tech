@@ -11,6 +11,8 @@ smartTOCHideUnfocusedChildren = false
 
 mainSections = ["blog", "publications"]
 
+replyByEmail = true
+
 [header]
 layout = "fixed"
 
