@@ -14,7 +14,7 @@ sharingLinks = [""]
 
 ### Sr. DevSecOps Engineer
 
-[Eutelsat OneWeb](https://oneweb.net/) | _Contract_  
+[BridgeView](https://www.bridgeviewit.com/) | _Contract_  
 August 2023 - Present  
 Chicago, IL | Remote
 
