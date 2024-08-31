@@ -8,6 +8,7 @@ showWordCount = false
 showReadingTime = false
 showTableOfContents = false
 sharingLinks = [""]
+replyByEmail = false
 +++
 
 ## Professional Experience

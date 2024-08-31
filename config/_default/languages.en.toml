@@ -1,7 +1,6 @@
 languageCode = "en"
 languageName = "English"
 weight = 1
-title = "yaseen.tech"
 
 [params]
 displayName = "EN"
@@ -12,13 +11,10 @@ dateFormat = "2 January 2006"
 logo = "img/yt-logo-125x125.png"
 
 [author]
-name = "Yaseen Younus"
+name = "Yaseen Younus, M.S."
 image = "img/yaseen-black-bg.png"
 email = "yaseenyounus1@gmail.com"
-headline = """
-Personal Site & Tech Blog<br><br>
-Cloud | DevOps | SRE | Platform | Architecture | Automation
-"""
+headline = "Cloud | DevOps | SRE | Platform | Architecture | Automation"
 bio = "Personal site and tech blog"
 links = [ 
     { email = "mailto:yaseenyounus1@gmail.com" }, 
