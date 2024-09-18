@@ -13,10 +13,16 @@ replyByEmail = false
 
 ## Professional Experience
 
+### Lead Technical Consultant
+
+[Perficient](https://www.perficient.com/) | _Full-time_  
+August 2024 - Present  
+Chicago, IL | Remote
+
 ### Sr. DevSecOps Engineer
 
 [BridgeView](https://www.bridgeviewit.com/) | _Contract_  
-August 2023 - Present  
+August 2023 - August 2024  
 Chicago, IL | Remote
 
 ### DevOps Engineer
