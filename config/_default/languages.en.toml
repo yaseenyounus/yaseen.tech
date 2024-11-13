@@ -10,7 +10,7 @@ description = "My awesome website"
 dateFormat = "2 January 2006"
 logo = "img/yt-logo-125x125.png"
 
-[author]
+[params.author]
 name = "Yaseen Younus, M.S."
 image = "img/yaseen-black-bg.png"
 email = "yaseenyounus1@gmail.com"
@@ -21,5 +21,9 @@ links = [
     { github = "https://github.com/yaseenyounus" }, 
     { linkedin = "https://www.linkedin.com/in/yaseenyounus/" },
     { medium = "https://medium.com/@yaseenyounus" },
-    { youtube = "https://www.youtube.com/@yaseenxyounus" }
+
+    { instagram = "https://www.instagram.com/yaseenxtech/" },
+    { tiktok = "https://www.tiktok.com/@yaseenxtech" },
+    { youtube = "https://youtube.com/@yaseenxtech" },
+    { twitter = "https://x.com/yaseenxtech" },
 ]
