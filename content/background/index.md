@@ -13,13 +13,19 @@ replyByEmail = false
 
 ## Professional Experience
 
+### Senior DevSecOps Engineer
+
+[Okta](https://www.okta.com/) | _Full-time_  
+June 2025 - Present  
+Chicago, IL | Remote
+
 ### Lead Technical Consultant
 
 [Perficient](https://www.perficient.com/) | _Full-time_  
-August 2024 - Present  
+August 2024 - June 2025  
 Chicago, IL | Remote
 
-### Sr. DevSecOps Engineer
+### Senior DevSecOps Engineer
 
 [BridgeView](https://www.bridgeviewit.com/) | _Contract_  
 August 2023 - August 2024  
