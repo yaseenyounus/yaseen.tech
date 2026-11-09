@@ -27,12 +27,12 @@ export const socials = [
 ];
 
 export const experience = [
-  { start: '2025', end: 'Now', role: 'Senior DevSecOps Engineer', company: 'Okta', href: 'https://www.okta.com/', type: 'Full-time' },
-  { start: '2024', end: '2025', role: 'Lead Technical Consultant', company: 'Perficient', href: 'https://www.perficient.com/', type: 'Full-time' },
-  { start: '2023', end: '2024', role: 'Senior DevSecOps Engineer', company: 'BridgeView', href: 'https://www.bridgeviewit.com/', type: 'Contract' },
-  { start: '2022', end: '2023', role: 'DevOps Engineer', company: 'Amazon Web Services', href: 'https://aws.amazon.com/', type: 'Full-time' },
-  { start: '2021', end: '2022', role: 'Site Reliability Engineer', company: 'Everbridge', href: 'https://www.everbridge.com/', type: 'Full-time' },
-  { start: '2018', end: '2021', role: 'DevOps / Platform Engineer', company: 'Abbott', href: 'https://www.abbott.com/', type: 'Full-time' },
+  { id: 'okta', start: '2025', end: 'Now', role: 'Senior DevSecOps Engineer', short: 'Sr. DevSecOps', company: 'Okta', href: 'https://www.okta.com/', type: 'Full-time', location: 'Remote' },
+  { id: 'perficient', start: '2024', end: '2025', role: 'Lead Technical Consultant', short: 'Tech Consultant', company: 'Perficient', href: 'https://www.perficient.com/', type: 'Full-time', location: 'Remote' },
+  { id: 'bridgeview', start: '2023', end: '2024', role: 'Senior DevSecOps Engineer', short: 'Sr. DevSecOps', company: 'BridgeView', href: 'https://www.bridgeviewit.com/', type: 'Contract', location: 'Remote' },
+  { id: 'aws', start: '2022', end: '2023', role: 'DevOps Engineer', short: 'DevOps Eng.', company: 'AWS', href: 'https://aws.amazon.com/', type: 'Full-time', location: 'Remote' },
+  { id: 'everbridge', start: '2021', end: '2022', role: 'Site Reliability Engineer', short: 'SRE', company: 'Everbridge', href: 'https://www.everbridge.com/', type: 'Full-time', location: 'Remote' },
+  { id: 'abbott', start: '2018', end: '2021', role: 'DevOps / Platform Engineer', short: 'Platform Eng.', company: 'Abbott', href: 'https://www.abbott.com/', type: 'Full-time', location: 'North Chicago, IL' },
 ];
 
 export const education = [

@@ -2,10 +2,10 @@
 @import '@fontsource-variable/geist-mono';
 
 :root {
-  --bg: #0a0a0a;
+  --bg: #0a0b0d;
   --panel: #0f0f0f;
   --hover: #141414;
-  --line: #1f1f1f;
+  --line: #1c2026;
   --line-strong: #2e2e2e;
   --text: #f2f2f2;
   --muted: #8a8a8a;

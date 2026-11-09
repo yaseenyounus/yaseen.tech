@@ -1,16 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
-import Nav from '../components/Nav.astro';
 ---
 
 <Base title="404 · Yaseen Younus">
-  <Nav />
-  <div class="frame nf">
-    <span class="mono accent">ERR_404</span>
-    <h1>Route not found<span class="accent">.</span></h1>
-    <p class="muted mono">GET {'{'}path{'}'} → no matching resource</p>
-    <a class="btn btn-solid" href="/">Back to home <span class="arrow">↗</span></a>
-  </div>
+  <main class="nf">
+    <p class="mono code">HTTP 404 · NoSuchKey</p>
+    <h1>This resource was never provisioned.</h1>
+    <p class="mono hint">The requested path isn't part of the stack.</p>
+    <a href="/" class="back mono">← Back to the architecture</a>
+  </main>
 </Base>
 
 <style>
@@ -19,14 +17,30 @@ import Nav from '../components/Nav.astro';
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 56px var(--pad) 0;
+    gap: 16px;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 24px;
+    background-image: radial-gradient(#1d2128 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .code {
+    color: #f87171;
   }
   h1 {
-    font-size: clamp(48px, 9vw, 112px);
+    font-size: clamp(32px, 6vw, 56px);
     font-weight: 600;
-    letter-spacing: -0.05em;
-    line-height: 0.95;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+  }
+  .hint {
+    color: var(--muted);
+  }
+  .back {
+    margin-top: 12px;
+    color: var(--text);
+  }
+  .back:hover {
+    color: #ff9a3c;
   }
 </style>
