@@ -1,7 +1,9 @@
 # yaseen.tech
 
-Personal site of Yaseen Younus, built with [Astro](https://astro.build). The homepage presents my career as an
-interactive cloud architecture diagram: click any node to inspect it.
+Personal site of Yaseen Younus, built with [Astro](https://astro.build).
+
+- `/` is the main site: hero, about, career pipeline, selected work, certifications, writing and contact.
+- `/architecture` shows the same career as an interactive cloud architecture diagram (click any node to inspect it).
 
 ## Develop
 
@@ -24,8 +26,8 @@ and the portrait is `src/assets/yaseen.png`.
 src/
   data/site.ts        # all content
   layouts/Base.astro  # <head>, SEO, analytics
-  components/         # Diagram (canvas, wiring, inspector), Icon
-  pages/              # index + 404
+  components/         # Header, Diagram (the /architecture page), Icon
+  pages/              # index, architecture, 404
   styles/global.css   # design tokens (colours, fonts, accent) and shared styles
 ```
 

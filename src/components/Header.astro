@@ -1,0 +1,195 @@
+---
+const links = [
+  { label: 'About', href: '#about' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Work', href: '#work' },
+  { label: 'Writing', href: '#writing' },
+];
+---
+
+<header class="hdr" data-hdr>
+  <div class="container inner">
+    <a href="#top" class="logo" aria-label="Yaseen Younus, home">
+      <span class="mark">YT</span>
+      <span class="name">Yaseen Younus</span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+
+    <a href="#contact" class="cta">Let's talk</a>
+
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu" data-menu-btn>
+      <span></span><span></span>
+    </button>
+  </div>
+
+  <nav id="mobile-menu" class="sheet" aria-label="Mobile" data-menu>
+    <div class="container">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+      <a href="#contact" class="sheet-cta">Let's talk →</a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const hdr = document.querySelector<HTMLElement>('[data-hdr]')!;
+  const btn = document.querySelector<HTMLButtonElement>('[data-menu-btn]')!;
+  const menu = document.querySelector<HTMLElement>('[data-menu]')!;
+
+  const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 12);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const setOpen = (open: boolean) => {
+    hdr.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  btn.addEventListener('click', () => setOpen(!hdr.classList.contains('open')));
+  menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (e) => e.key === 'Escape' && setOpen(false));
+</script>
+
+<style>
+  .hdr {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    transition: background 0.3s, border-color 0.3s;
+    border-bottom: 1px solid transparent;
+  }
+  .hdr.scrolled,
+  .hdr.open {
+    background: rgba(11, 11, 12, 0.82);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border-bottom-color: var(--line);
+  }
+  .hdr.open {
+    background: var(--bg);
+  }
+  .inner {
+    height: 68px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .mark {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    background: var(--accent);
+    color: #1a0e02;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .nav {
+    margin-left: auto;
+    display: flex;
+    gap: 4px;
+  }
+  .nav a {
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    color: var(--muted);
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav a:hover {
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .cta {
+    padding: 9px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    background: var(--text);
+    color: #0b0b0c;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .cta:hover {
+    background: var(--accent);
+  }
+  .menu-btn {
+    display: none;
+    margin-left: auto;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line-strong);
+    border-radius: 12px;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+  }
+  .menu-btn span {
+    position: absolute;
+    left: 13px;
+    right: 13px;
+    height: 1.5px;
+    background: var(--text);
+    transition: transform 0.3s var(--ease), top 0.3s var(--ease);
+  }
+  .menu-btn span:first-child {
+    top: 17px;
+  }
+  .menu-btn span:last-child {
+    top: 25px;
+  }
+  .open .menu-btn span:first-child {
+    top: 21px;
+    transform: rotate(45deg);
+  }
+  .open .menu-btn span:last-child {
+    top: 21px;
+    transform: rotate(-45deg);
+  }
+  .sheet {
+    display: none;
+  }
+
+  @media (max-width: 760px) {
+    .nav,
+    .cta {
+      display: none;
+    }
+    .menu-btn {
+      display: block;
+    }
+    .sheet {
+      display: block;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s var(--ease);
+    }
+    .open .sheet {
+      max-height: 420px;
+    }
+    .sheet .container {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 20px;
+    }
+    .sheet a {
+      padding: 14px 0;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+      border-bottom: 1px solid var(--line);
+    }
+    .sheet .sheet-cta {
+      border: 0;
+      color: var(--accent);
+    }
+  }
+</style>
