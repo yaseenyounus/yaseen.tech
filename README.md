@@ -13,19 +13,17 @@ npm run preview
 
 ## Editing content
 
-Everything — profile, experience, education, certifications, projects, posts and social links — lives in
-[`src/data/site.ts`](src/data/site.ts). Certification badge images are in `src/assets/certs/` (referenced by file name),
-and the portrait is `src/assets/yaseen.png`.
+Everything (bio, work, projects, writing, certifications, education, links) lives in
+[`src/data/site.ts`](src/data/site.ts). The portrait is `src/assets/yaseen.png`.
 
 ## Structure
 
 ```
 src/
   data/site.ts        # all content
-  layouts/Base.astro  # <head>, SEO, analytics, background, scroll-reveal
-  components/         # Nav, Hero, Bento, Experience, Certs, Work, Contact, Icon
+  layouts/Base.astro  # <head>, SEO, analytics
   pages/              # index + 404
-  styles/global.css   # design tokens & shared styles
+  styles/global.css   # colours (light/dark) and base styles
 ```
 
 ## Deploy

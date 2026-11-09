@@ -1,22 +1,238 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import Nav from '../components/Nav.astro';
-import Hero from '../components/Hero.astro';
-import Bento from '../components/Bento.astro';
-import Experience from '../components/Experience.astro';
-import Certs from '../components/Certs.astro';
-import Work from '../components/Work.astro';
-import Contact from '../components/Contact.astro';
+import photo from '../assets/yaseen.png';
+import {
+  profile,
+  links,
+  socials,
+  experience,
+  education,
+  projects,
+  posts,
+  certifications,
+  credly,
+} from '../data/site';
+
+const year = new Date().getFullYear();
 ---
 
 <Base>
-  <Nav />
   <main>
-    <Hero />
-    <Bento />
-    <Experience />
-    <Certs />
-    <Work />
-    <Contact />
+    <header>
+      <Image src={photo} alt="" width={96} height={96} class="avatar" loading="eager" />
+      <div>
+        <h1>{profile.name}</h1>
+        <p class="muted">{profile.role}</p>
+      </div>
+    </header>
+
+    <section class="bio">
+      {profile.bio.map((p) => <p>{p}</p>)}
+      <p class="links">
+        <a href={`mailto:${profile.email}`}>Email</a>
+        {links.map((l) => <a href={l.href} target="_blank" rel="noopener me">{l.label}</a>)}
+      </p>
+    </section>
+
+    <section>
+      <h2>Work</h2>
+      <ul>
+        {
+          experience.map((j) => (
+            <li>
+              <span>
+                {j.role} <a href={j.href} target="_blank" rel="noopener" class="muted">{j.company}</a>
+              </span>
+              <span class="muted nums">{j.years}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+      <p class="muted intro">
+        AWS CDK examples I contributed to <a href="https://github.com/aws-samples/aws-cdk-examples" target="_blank" rel="noopener">aws-samples</a>.
+      </p>
+      <ul>
+        {
+          projects.map((p) => (
+            <li>
+              <span>{p.title}</span>
+              <span class="langs">
+                {p.links.map((l) => (
+                  <a href={l.href} target="_blank" rel="noopener" class="muted">{l.label}</a>
+                ))}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section>
+      <h2>Writing</h2>
+      <ul>
+        {
+          posts.map((p) => (
+            <li>
+              <a href={p.href} target="_blank" rel="noopener">{p.title}</a>
+              <span class="muted nums">{p.date}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section>
+      <h2>Certifications</h2>
+      <ul class="certs">
+        {certifications.map((c) => <li><span>{c}</span></li>)}
+      </ul>
+      <p class="more"><a href={credly} target="_blank" rel="noopener" class="muted">View all on Credly</a></p>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <ul>
+        {
+          education.map((e) => (
+            <li>
+              <span>
+                {e.degree} <a href={e.href} target="_blank" rel="noopener" class="muted">{e.school}</a>
+              </span>
+              <span class="muted nums">{e.years}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <footer>
+      <p class="links">
+        {socials.map((s) => <a href={s.href} target="_blank" rel="noopener me" class="muted">{s.label}</a>)}
+      </p>
+      <p class="faint">© {year} {profile.name}</p>
+    </footer>
   </main>
 </Base>
+
+<style>
+  main {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: clamp(56px, 12vh, 120px) 20px 64px;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  :global(.avatar) {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 25%;
+    background: #000;
+  }
+  h1 {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  header p {
+    line-height: 1.4;
+  }
+  .muted {
+    color: var(--muted);
+  }
+  .faint {
+    color: var(--faint);
+  }
+  .nums {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .bio {
+    margin-top: 32px;
+  }
+  .bio p + p {
+    margin-top: 12px;
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+  }
+  .bio .links {
+    margin-top: 20px;
+  }
+
+  section + section {
+    margin-top: 56px;
+  }
+  h2 {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .intro {
+    margin-bottom: 8px;
+  }
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  li:last-child {
+    border-bottom: 0;
+  }
+  .certs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 24px;
+  }
+  .certs li {
+    border-bottom: 0;
+    padding: 3px 0;
+  }
+  .langs {
+    display: flex;
+    gap: 12px;
+    white-space: nowrap;
+  }
+  .more {
+    margin-top: 8px;
+  }
+
+  footer {
+    margin-top: 80px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  footer .links {
+    gap: 4px 14px;
+  }
+
+  @media (max-width: 480px) {
+    li {
+      flex-direction: column;
+      gap: 0;
+    }
+    .certs {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
