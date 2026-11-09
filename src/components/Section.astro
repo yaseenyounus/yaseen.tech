@@ -1,0 +1,72 @@
+---
+interface Props {
+  id: string;
+  num: string;
+  title: string;
+  note?: string;
+}
+const { id, num, title, note } = Astro.props;
+---
+
+<section id={id} class="rule sec">
+  <div class="head">
+    <span class="mono accent">{num}</span>
+    <h2>{title}</h2>
+    {note && <p class="mono faint note">{note}</p>}
+    <slot name="head" />
+  </div>
+  <div class="body">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .sec {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+  }
+  .head {
+    padding: 40px var(--pad);
+    border-right: 1px solid var(--line);
+  }
+  .head > :global(*) {
+    position: sticky;
+    top: 88px;
+  }
+  h2 {
+    margin-top: 10px;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .note {
+    margin-top: 10px;
+  }
+  .body {
+    min-width: 0;
+  }
+  @media (max-width: 860px) {
+    .sec {
+      grid-template-columns: 1fr;
+    }
+    .head {
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+      padding-block: 28px 24px;
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .head > :global(*) {
+      position: static;
+    }
+    h2 {
+      margin-top: 0;
+    }
+    .note {
+      margin-top: 0;
+      margin-left: auto;
+    }
+  }
+</style>

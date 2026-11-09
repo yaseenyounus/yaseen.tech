@@ -1,25 +1,32 @@
 ---
 import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
 ---
 
-<Base title="Not found · Yaseen Younus">
-  <main>
-    <h1>Page not found</h1>
-    <p>Nothing here. <a href="/">Go home</a>.</p>
-  </main>
+<Base title="404 · Yaseen Younus">
+  <Nav />
+  <div class="frame nf">
+    <span class="mono accent">ERR_404</span>
+    <h1>Route not found<span class="accent">.</span></h1>
+    <p class="muted mono">GET {'{'}path{'}'} → no matching resource</p>
+    <a class="btn btn-solid" href="/">Back to home <span class="arrow">↗</span></a>
+  </div>
 </Base>
 
 <style>
-  main {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: clamp(56px, 12vh, 120px) 20px;
+  .nf {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 56px var(--pad) 0;
   }
   h1 {
-    font-size: 15px;
-    font-weight: 500;
-  }
-  p {
-    color: var(--muted);
+    font-size: clamp(48px, 9vw, 112px);
+    font-weight: 600;
+    letter-spacing: -0.05em;
+    line-height: 0.95;
   }
 </style>

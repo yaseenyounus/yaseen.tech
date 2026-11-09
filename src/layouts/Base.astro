@@ -9,7 +9,7 @@ interface Props {
   description?: string;
 }
 
-const { title = profile.name, description = profile.description } = Astro.props;
+const { title = `${profile.name} · ${profile.role}`, description = profile.description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const og = await getImage({ src: photo, width: 800, height: 800, format: 'jpeg' });
 const ogUrl = new URL(og.src, Astro.site);
@@ -19,8 +19,8 @@ const personLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: profile.name,
-  jobTitle: 'Senior DevSecOps Engineer',
-  worksFor: { '@type': 'Organization', name: 'Okta' },
+  jobTitle: profile.role,
+  worksFor: { '@type': 'Organization', name: profile.company },
   url: profile.url,
   sameAs: socials.map((s) => s.href),
 };
@@ -34,8 +34,7 @@ const personLd = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content={profile.name} />
-    <meta name="theme-color" content="#fcfcfb" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#0a0a0a" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

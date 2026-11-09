@@ -13,8 +13,9 @@ npm run preview
 
 ## Editing content
 
-Everything (bio, work, projects, writing, certifications, education, links) lives in
-[`src/data/site.ts`](src/data/site.ts). The portrait is `src/assets/yaseen.png`.
+Everything (intro, experience, projects, certifications, writing, links) lives in
+[`src/data/site.ts`](src/data/site.ts). Certification badges are in `src/assets/certs/` (referenced by file name)
+and the portrait is `src/assets/yaseen.png`.
 
 ## Structure
 
@@ -22,8 +23,9 @@ Everything (bio, work, projects, writing, certifications, education, links) live
 src/
   data/site.ts        # all content
   layouts/Base.astro  # <head>, SEO, analytics
+  components/         # Nav, Hero, Section
   pages/              # index + 404
-  styles/global.css   # colours (light/dark) and base styles
+  styles/global.css   # design tokens (colours, fonts, accent) and shared styles
 ```
 
 ## Deploy

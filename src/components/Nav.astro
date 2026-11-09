@@ -1,0 +1,98 @@
+---
+const links = [
+  { label: 'Experience', href: '#experience' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Certs', href: '#certs' },
+  { label: 'Writing', href: '#writing' },
+];
+---
+
+<header class="bar">
+  <nav class="inner" aria-label="Primary">
+    <a href="#top" class="brand">
+      <span class="mark">YT</span>
+      <span class="mono">yaseen.tech</span>
+    </a>
+    <ul class="links">
+      {
+        links.map((l, i) => (
+          <li>
+            <a href={l.href} class="mono">
+              <span class="faint">0{i + 1}</span> {l.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <a href="#contact" class="mono contact">Contact <span class="arrow">↗</span></a>
+  </nav>
+</header>
+
+<style>
+  .bar {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    background: rgba(10, 10, 10, 0.78);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .inner {
+    max-width: var(--max);
+    height: 56px;
+    margin-inline: auto;
+    border-inline: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding-inline: var(--pad);
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .mark {
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    background: var(--accent);
+    color: #000;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: -0.02em;
+  }
+  .links {
+    display: flex;
+    gap: 28px;
+    margin-left: auto;
+  }
+  .links a,
+  .contact {
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+  .links a:hover,
+  .contact:hover {
+    color: var(--text);
+  }
+  .contact {
+    padding-left: 24px;
+    border-left: 1px solid var(--line);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text);
+  }
+  @media (max-width: 760px) {
+    .links {
+      display: none;
+    }
+    .contact {
+      margin-left: auto;
+    }
+  }
+</style>
