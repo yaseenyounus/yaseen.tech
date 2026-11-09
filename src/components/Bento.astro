@@ -1,0 +1,346 @@
+---
+import { Image } from 'astro:assets';
+import { profile, education, stack, certifications } from '../data/site';
+import photo from '../assets/yaseen.png';
+import Icon from './Icon.astro';
+
+const certImages = import.meta.glob<{ default: ImageMetadata }>('../assets/certs/*.png', { eager: true });
+const badge = (file: string) => certImages[`../assets/certs/${file}.png`].default;
+const topCerts = certifications.slice(0, 4);
+const years = new Date().getFullYear() - profile.careerStart;
+const companies = 6;
+---
+
+<section id="about" class="section container">
+  <span class="eyebrow" data-reveal>About</span>
+  <h2 class="section-title" data-reveal style="--d:60ms">
+    Cloud-native by trade.<br /><span class="dim">Security-minded by default.</span>
+  </h2>
+
+  <div class="bento">
+    <div class="card tile photo" data-reveal style="--d:80ms">
+      <Image src={photo} alt={`Portrait of ${profile.name}`} widths={[400, 700, 1000]} sizes="(max-width: 720px) 100vw, 560px" loading="eager" />
+      <div class="photo-meta">
+        <span class="pill"><Icon name="pin" size={12} /> {profile.location}</span>
+      </div>
+    </div>
+
+    <div class="card tile clock" data-reveal style="--d:140ms">
+      <span class="label">Local time</span>
+      <div class="big mono" data-clock data-tz={profile.timezone}>--:--</div>
+      <span class="sub">Chicago · CT</span>
+    </div>
+
+    <div class="card tile stat" data-reveal style="--d:200ms">
+      <span class="label">Experience</span>
+      <div class="big">{years}<span class="plus">+</span></div>
+      <span class="sub">years · {companies} teams</span>
+    </div>
+
+    <a href="#certs" class="card tile certs" data-reveal style="--d:260ms">
+      <div>
+        <span class="label">Certifications</span>
+        <div class="big">{certifications.length}</div>
+        <span class="sub">AWS Pro, Specialty, Terraform &amp; more</span>
+      </div>
+      <div class="badges" aria-hidden="true">
+        {topCerts.map((c) => <Image src={badge(c.file)} alt="" width={96} height={96} />)}
+      </div>
+      <Icon name="arrow" size={18} class="corner" />
+    </a>
+
+    <div class="card tile edu" data-reveal style="--d:120ms">
+      <span class="label"><Icon name="cap" size={14} /> Education</span>
+      <ul>
+        {
+          education.map((e) => (
+            <li>
+              <a href={e.href} target="_blank" rel="noopener">
+                <strong>{e.school}</strong>
+                <span>{e.degree}</span>
+              </a>
+              <span class="years mono">{e.years}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="card tile stack" data-reveal style="--d:180ms">
+      <span class="label">Toolbox</span>
+      <div class="marquee" aria-label={stack.join(', ')}>
+        <div class="track">
+          {[...stack, ...stack].map((s, i) => <span class="chip" aria-hidden={i >= stack.length ? 'true' : undefined}>{s}</span>)}
+        </div>
+        <div class="track reverse" aria-hidden="true">
+          {[...stack.slice().reverse(), ...stack.slice().reverse()].map((s) => <span class="chip">{s}</span>)}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const el = document.querySelector<HTMLElement>('[data-clock]');
+  if (el) {
+    const fmt = new Intl.DateTimeFormat('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+      timeZone: el.dataset.tz,
+    });
+    const tick = () => (el.textContent = fmt.format(new Date()));
+    tick();
+    setInterval(tick, 15_000);
+  }
+</script>
+
+<style>
+  .bento {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(180px, auto);
+    gap: 14px;
+  }
+  .tile {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  .label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .big {
+    margin-top: auto;
+    font-size: clamp(44px, 5vw, 60px);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1;
+  }
+  .mono {
+    font-family: var(--font-mono);
+    letter-spacing: -0.04em;
+  }
+  .clock .big {
+    font-size: clamp(28px, 4.2vw, 50px);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .plus {
+    color: var(--accent);
+  }
+  .sub {
+    margin-top: 10px;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+
+  .photo {
+    grid-column: span 2;
+    grid-row: span 2;
+    padding: 0;
+    background: #000;
+    min-height: 380px;
+  }
+  .photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 30%;
+    transition: transform 1.2s var(--ease);
+  }
+  .photo:hover img {
+    transform: scale(1.03);
+  }
+  .photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 40%);
+  }
+  .photo-meta {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    z-index: 1;
+  }
+  .photo-meta .pill {
+    color: var(--text);
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+
+  .certs {
+    grid-column: span 2;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .certs > div:first-child {
+    display: flex;
+    flex-direction: column;
+  }
+  .badges {
+    display: flex;
+    align-items: center;
+    padding-right: 24px;
+  }
+  .badges img {
+    width: 72px;
+    height: 72px;
+    margin-left: -18px;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.5));
+    transition: transform 0.5s var(--ease);
+  }
+  .certs:hover .badges img {
+    transform: translateY(-4px);
+  }
+  .certs:hover .badges img:nth-child(2) {
+    transition-delay: 40ms;
+  }
+  .certs:hover .badges img:nth-child(3) {
+    transition-delay: 80ms;
+  }
+  .certs:hover .badges img:nth-child(4) {
+    transition-delay: 120ms;
+  }
+  :global(.corner) {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: var(--faint);
+    transition: color 0.3s, transform 0.4s var(--ease);
+  }
+  .certs:hover :global(.corner) {
+    color: var(--text);
+    transform: translate(2px, -2px);
+  }
+
+  .edu {
+    grid-column: span 2;
+  }
+  .edu ul {
+    list-style: none;
+    margin: auto 0 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+  }
+  .edu li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .edu li a {
+    display: flex;
+    flex-direction: column;
+  }
+  .edu strong {
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+  .edu li a:hover strong {
+    color: var(--accent);
+  }
+  .edu li a span {
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .years {
+    font-size: 12px;
+    color: var(--faint);
+    white-space: nowrap;
+  }
+
+  .stack {
+    grid-column: span 2;
+    padding-inline: 0;
+  }
+  .stack .label {
+    padding-inline: 24px;
+  }
+  .marquee {
+    margin-top: auto;
+    display: grid;
+    gap: 10px;
+    padding-top: 20px;
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  }
+  .track {
+    display: flex;
+    gap: 8px;
+    width: max-content;
+    animation: scroll 38s linear infinite;
+  }
+  .track.reverse {
+    animation-direction: reverse;
+    animation-duration: 44s;
+  }
+  .stack:hover .track {
+    animation-play-state: paused;
+  }
+  .chip {
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.025);
+    font-size: 13.5px;
+    color: #c4c6cf;
+    white-space: nowrap;
+  }
+  @keyframes scroll {
+    to {
+      transform: translateX(calc(-50% - 4px));
+    }
+  }
+
+  @media (max-width: 880px) {
+    .bento {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .photo {
+      grid-row: span 1;
+      min-height: 420px;
+    }
+  }
+  @media (max-width: 520px) {
+    .bento {
+      gap: 10px;
+      grid-auto-rows: minmax(150px, auto);
+    }
+    .tile {
+      padding: 18px;
+    }
+    .stack .label {
+      padding-inline: 18px;
+    }
+    .certs {
+      flex-direction: column;
+    }
+    .badges {
+      padding: 0 0 0 16px;
+    }
+    .badges img {
+      width: 60px;
+      height: 60px;
+      margin-left: -16px;
+    }
+    .edu li {
+      flex-direction: column;
+      gap: 2px;
+    }
+  }
+</style>

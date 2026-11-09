@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+---
+
+<Base title="Page not found — Yaseen Younus">
+  <main class="container nf">
+    <span class="eyebrow">Error 404</span>
+    <h1>Lost in the<br /><span>cloud.</span></h1>
+    <p>This page doesn't exist — or it was never deployed.</p>
+    <a class="btn btn-primary" href="/">Take me home <Icon name="arrow" size={16} /></a>
+  </main>
+</Base>
+
+<style>
+  .nf {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  h1 {
+    font-size: clamp(56px, 12vw, 128px);
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+    font-weight: 600;
+  }
+  h1 span {
+    color: var(--faint);
+  }
+  p {
+    color: var(--muted);
+    font-size: 18px;
+  }
+</style>
