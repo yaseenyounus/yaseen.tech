@@ -69,7 +69,7 @@ const handle = (href: string) => href.replace(/^https:\/\/(www\.)?/, '').replace
     <main class="canvas-wrap">
       <div class="canvas-head mono">
         <span>Architecture</span>
-        <span class="dim">· {bootOrder.length} resources · select a node</span>
+        <span class="dim"><span class="hide-xs">· {bootOrder.length} resources </span>· select a node</span>
       </div>
 
       <div class="canvas" data-canvas data-edges={JSON.stringify(edges)} data-boot={JSON.stringify(bootOrder)}>
@@ -588,6 +588,8 @@ const handle = (href: string) => href.replace(/^https:\/\/(www\.)?/, '').replace
     font: inherit;
     color: var(--text);
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .sep {
     color: #333a44;
@@ -1290,6 +1292,23 @@ const handle = (href: string) => href.replace(/^https:\/\/(www\.)?/, '').replace
       max-width: 560px;
       width: 100%;
       margin-inline: auto;
+    }
+  }
+</style>
+
+<style>
+  @media (max-width: 420px) {
+    .hide-xs {
+      display: none;
+    }
+    [data-status-text] {
+      display: none;
+    }
+    .status {
+      padding: 6px;
+    }
+    .bar {
+      gap: 12px;
     }
   }
 </style>
