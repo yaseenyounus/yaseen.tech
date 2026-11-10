@@ -1,0 +1,102 @@
+---
+// Ambient, interactive dot grid rendered to a canvas.
+// Dots ripple slowly; on pointer devices they light up around the cursor.
+---
+
+<canvas class="dots" data-dots aria-hidden="true"></canvas>
+
+<script>
+  const canvas = document.querySelector<HTMLCanvasElement>('[data-dots]');
+  if (canvas) {
+    const ctx = canvas.getContext('2d')!;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const GAP = 22;
+    const R = 170; // cursor influence radius
+    let w = 0, h = 0, dpr = 1, raf = 0, visible = true;
+    const mouse = { x: -9999, y: -9999, tx: -9999, ty: -9999 };
+
+    const resize = () => {
+      const r = canvas.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = r.width;
+      h = r.height;
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      if (reduce) draw(0);
+    };
+
+    const draw = (t: number) => {
+      ctx.clearRect(0, 0, w, h);
+      mouse.x += (mouse.tx - mouse.x) * 0.12;
+      mouse.y += (mouse.ty - mouse.y) * 0.12;
+      const time = t * 0.0006;
+      const ox = (w % GAP) / 2;
+      const oy = (h % GAP) / 2;
+      for (let y = oy; y < h; y += GAP) {
+        for (let x = ox; x < w; x += GAP) {
+          const wave = Math.sin(x * 0.012 + time) * Math.cos(y * 0.016 - time * 0.8);
+          let a = 0.17 + wave * 0.1;
+          let size = 1;
+          const dx = x - mouse.x;
+          const dy = y - mouse.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < R * R) {
+            const k = 1 - Math.sqrt(d2) / R;
+            a += k * k * 0.75;
+            size += k * 0.9;
+          }
+          ctx.fillStyle = `rgba(220, 225, 255, ${a.toFixed(3)})`;
+          ctx.fillRect(x - size / 2, y - size / 2, size, size);
+        }
+      }
+    };
+
+    const loop = (t: number) => {
+      draw(t);
+      raf = visible ? requestAnimationFrame(loop) : 0;
+    };
+
+    resize();
+    new ResizeObserver(resize).observe(canvas);
+
+    if (!reduce) {
+      const host = canvas.parentElement!;
+      host.addEventListener('pointermove', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        const r = canvas.getBoundingClientRect();
+        mouse.tx = e.clientX - r.left;
+        mouse.ty = e.clientY - r.top;
+        if (mouse.x < -1000) {
+          mouse.x = mouse.tx;
+          mouse.y = mouse.ty;
+        }
+      });
+      host.addEventListener('pointerleave', () => {
+        mouse.tx = mouse.ty = -9999;
+        mouse.x = mouse.y = -9999;
+      });
+      new IntersectionObserver(([e]) => {
+        visible = e.isIntersecting && !document.hidden;
+        if (visible && !raf) raf = requestAnimationFrame(loop);
+      }).observe(canvas);
+      document.addEventListener('visibilitychange', () => {
+        visible = !document.hidden;
+        if (visible && !raf) raf = requestAnimationFrame(loop);
+      });
+      raf = requestAnimationFrame(loop);
+    }
+  }
+</script>
+
+<style>
+  .dots {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    mask-image: radial-gradient(ellipse 75% 70% at 50% 45%, #000 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 45%, #000 30%, transparent 80%);
+  }
+</style>

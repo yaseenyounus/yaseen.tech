@@ -1,205 +1,131 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import Header from '../components/Header.astro';
+import DotField from '../components/DotField.astro';
 import photo from '../assets/yaseen.png';
-import { profile, socials, experience, education, projects, posts, certifications, credly } from '../data/site';
+import { profile, socials, experience, projects, posts, certifications, credly } from '../data/site';
 
 const badges = import.meta.glob<{ default: ImageMetadata }>('../assets/certs/*.png', { eager: true });
 const badge = (file: string) => badges[`../assets/certs/${file}.png`].default;
-const years = new Date().getFullYear() - profile.careerStart;
-const pipeline = [...experience].reverse(); // chronological, flowing into the current role
-const primary = socials.slice(0, 3);
-const stats = [
-  { n: `${years}+`, l: 'Years in cloud & DevOps' },
-  { n: `${certifications.length}`, l: 'Certifications' },
-  { n: `${experience.length}`, l: 'Companies' },
-  { n: 'M.S.', l: 'Northwestern, Data Science & AI' },
-];
+const github = socials.find((s) => s.label === 'GitHub')!;
+const linkedin = socials.find((s) => s.label === 'LinkedIn')!;
+const medium = socials.find((s) => s.label === 'Medium')!;
 ---
 
 <Base>
-  <Header />
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="#top" class="brand" aria-label="Home">
+        <span class="mark">YT</span>
+        <span class="brand-name">Yaseen Younus</span>
+      </a>
+      <nav class="links" aria-label="Primary">
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#writing">Writing</a>
+      </nav>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </div>
+  </header>
 
   <main>
     <!-- Hero -->
-    <section id="top" class="hero container">
-      <div class="hero-copy">
-        <p class="status" data-reveal>
-          <span class="dot" aria-hidden="true"></span>
-          {profile.role} at {profile.company}
-        </p>
-        <h1 data-reveal style="--d:80ms">
-          Hi, I'm Yaseen.<br />
-          I build <em>secure</em> cloud platforms.
-        </h1>
+    <section id="top" class="hero">
+      <DotField />
+      <div class="glow" aria-hidden="true"></div>
+
+      <div class="hero-inner container">
+        <a href="#experience" class="pill" data-reveal>
+          <Image src={photo} alt="" width={48} height={48} class="avatar" loading="eager" />
+          <span><span class="live" aria-hidden="true"></span>{profile.role} at {profile.company}</span>
+        </a>
+
+        <h1 data-reveal style="--d:80ms">{profile.name}</h1>
+
         <p class="lede" data-reveal style="--d:160ms">
-          DevSecOps engineer in Chicago with {years}+ years automating infrastructure at AWS, Okta, Everbridge and Abbott.
+          I build secure, automated cloud infrastructure. <br class="br" />
+          8+ years across AWS, Okta, Everbridge and Abbott.
         </p>
-        <div class="actions" data-reveal style="--d:240ms">
-          <a class="btn btn-solid" href="#contact">Get in touch</a>
-          <a class="btn" href="#work">View my work</a>
-        </div>
-        <ul class="quick" data-reveal style="--d:300ms">
-          {
-            primary.map((s) => (
-              <li>
-                <a href={s.href} target="_blank" rel="noopener me">{s.label} ↗</a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
 
-      <figure class="hero-photo" data-reveal style="--d:120ms">
-        <div class="frame">
-          <Image src={photo} alt={`Portrait of ${profile.name}`} widths={[400, 640, 900]} sizes="(max-width: 860px) 90vw, 440px" loading="eager" fetchpriority="high" />
-        </div>
-        <figcaption class="chip chip-loc mono">◎ {profile.location}</figcaption>
-        <div class="chip chip-now">
-          <span class="mono">Currently</span>
-          <strong>{profile.company}</strong>
-        </div>
-      </figure>
-    </section>
-
-    <!-- Stats -->
-    <section class="container">
-      <ul class="stats">
-        {
-          stats.map((s, i) => (
-            <li data-reveal style={`--d:${i * 70}ms`}>
-              <span class="n">{s.n}</span>
-              <span class="l">{s.l}</span>
-            </li>
-          ))
-        }
-      </ul>
-    </section>
-
-    <!-- About -->
-    <section id="about" class="section container about">
-      <p class="kicker mono" data-reveal>About</p>
-      <div class="about-grid">
-        <h2 class="statement" data-reveal style="--d:60ms">
-          Turning messy infrastructure into <em>calm, automated</em> systems.
-        </h2>
-        <div class="about-body" data-reveal style="--d:140ms">
-          <p>
-            I work where cloud, security and automation meet: CI/CD pipelines, infrastructure as code, and guardrails that let teams move fast without breaking things.
-          </p>
-          <ul class="edu">
-            {
-              education.map((e) => (
-                <li>
-                  <a href={e.href} target="_blank" rel="noopener">
-                    <span class="edu-deg">{e.degree}</span>
-                    <span class="edu-school">{e.school}</span>
-                  </a>
-                  <span class="mono edu-yr">{e.years}</span>
-                </li>
-              ))
-            }
-          </ul>
+        <div class="cta" data-reveal style="--d:240ms">
+          <a class="btn btn-primary" href="#contact">Get in touch</a>
+          <a class="btn" href={github.href} target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href={linkedin.href} target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
     </section>
 
     <!-- Experience -->
     <section id="experience" class="section container">
-      <div class="sec-head">
-        <h2 data-reveal>Career <em>pipeline</em></h2>
-        <p class="mono faint" data-reveal style="--d:80ms">{profile.careerStart} → now</p>
-      </div>
-
-      <div class="pipe" data-reveal style="--d:120ms">
-        <span class="packet" style="--d:0s" aria-hidden="true"></span>
-        <span class="packet" style="--d:-2s" aria-hidden="true"></span>
-        <span class="packet" style="--d:-4s" aria-hidden="true"></span>
-        <ol class="stages">
+      <header class="sec-head" data-reveal>
+        <span class="mono label">01</span>
+        <h2>Experience</h2>
+      </header>
+      <ul class="table" data-reveal style="--d:80ms">
         {
-          pipeline.map((j) => (
-            <li class:list={['stage', { now: j.end === 'Now' }]}>
-              <span class="node" aria-hidden="true" />
-              <a class="job" href={j.href} target="_blank" rel="noopener">
-                <span class="mono yrs">
-                  {j.start} – {j.end}
+          experience.map((j) => (
+            <li>
+              <a href={j.href} target="_blank" rel="noopener" class="row">
+                <span class="logo" aria-hidden="true">{j.company[0]}</span>
+                <span class="row-main">
+                  <span class="row-title">{j.company}</span>
+                  <span class="row-sub">{j.role}</span>
+                  <span class="row-yrs-m mono">{j.start} – {j.end === 'Now' ? 'Present' : j.end}</span>
                 </span>
-                <span class="co">{j.company}</span>
-                <span class="role">{j.role}</span>
-                <span class="meta mono">
-                  {j.type} · {j.location}
+                <span class="row-meta mono">
+                  {j.end === 'Now' && <span class="now"><span class="live" />Now</span>}
+                  <span class="yrs">{j.start} – {j.end === 'Now' ? 'Present' : j.end}</span>
                 </span>
-                {j.end === 'Now' && <span class="now-pill mono">Now</span>}
               </a>
             </li>
           ))
         }
-        </ol>
-      </div>
+      </ul>
     </section>
 
-    <!-- Work -->
-    <section id="work" class="section container">
-      <div class="sec-head">
-        <h2 data-reveal>Selected <em>work</em></h2>
-        <p class="mono faint" data-reveal style="--d:80ms">Open source</p>
-      </div>
-      <p class="sec-note" data-reveal>
-        AWS CDK examples I contributed to <a href="https://github.com/aws-samples/aws-cdk-examples" target="_blank" rel="noopener">aws-samples/aws-cdk-examples</a>, the official AWS samples repo.
-      </p>
-
-      <ul class="work">
+    <!-- Projects -->
+    <section id="projects" class="section container">
+      <header class="sec-head" data-reveal>
+        <span class="mono label">02</span>
+        <h2>Projects</h2>
+        <p class="sec-sub">
+          Open-source contributions to <a href="https://github.com/aws-samples/aws-cdk-examples" target="_blank" rel="noopener">aws-cdk-examples</a>
+        </p>
+      </header>
+      <ul class="cards">
         {
           projects.map((p, i) => (
-            <li class="card proj" data-reveal style={`--d:${i * 80}ms`}>
-              <p class="mono svc">{p.services.join(' · ')}</p>
+            <li class="card" data-reveal style={`--d:${i * 80}ms`}>
+              <span class="mono tag">{p.services.join(' · ')}</span>
               <h3>{p.title}</h3>
-              <p class="blurb">{p.blurb}</p>
-              <div class="langs">
+              <p>{p.blurb}</p>
+              <span class="langs">
                 {p.links.map((l) => (
                   <a href={l.href} target="_blank" rel="noopener" class="mono">
-                    {l.label} ↗
+                    {l.label}
                   </a>
                 ))}
-              </div>
+              </span>
             </li>
           ))
         }
-        <li class="card proj arch" data-reveal style="--d:240ms">
-          <a href="/architecture" class="arch-link">
-            <p class="mono svc">Side quest</p>
-            <h3>This site, as an <em>architecture diagram</em></h3>
-            <p class="blurb">My career modelled as cloud infrastructure, with live data packets and an inspector.</p>
-            <span class="arch-cta mono">Open diagram →</span>
-            <svg class="arch-art" viewBox="0 0 200 90" aria-hidden="true">
-              <path d="M20 20 H90 V70 H180" />
-              <path d="M90 20 H180" />
-              <rect x="6" y="12" width="28" height="16" rx="4" />
-              <rect x="76" y="12" width="28" height="16" rx="4" />
-              <rect x="166" y="12" width="28" height="16" rx="4" />
-              <rect x="166" y="62" width="28" height="16" rx="4" />
-              <circle r="2.5"><animateMotion dur="3s" repeatCount="indefinite" path="M20 20 H90 V70 H180" /></circle>
-              <circle r="2.5"><animateMotion dur="2.4s" begin="-1s" repeatCount="indefinite" path="M90 20 H180" /></circle>
-            </svg>
-          </a>
-        </li>
       </ul>
     </section>
 
     <!-- Certifications -->
     <section id="certs" class="section container">
-      <div class="sec-head">
-        <h2 data-reveal><em>{certifications.length}</em> certifications</h2>
-        <a class="mono link" href={credly} target="_blank" rel="noopener" data-reveal style="--d:80ms">Verify on Credly ↗</a>
-      </div>
-      <ul class="badges">
+      <header class="sec-head" data-reveal>
+        <span class="mono label">03</span>
+        <h2>Certifications</h2>
+        <p class="sec-sub">
+          {certifications.length} credentials across AWS, HashiCorp and Python. <a href={credly} target="_blank" rel="noopener">Verify on Credly</a>
+        </p>
+      </header>
+      <ul class="badges" data-reveal style="--d:80ms">
         {
-          certifications.map((c, i) => (
-            <li data-reveal style={`--d:${(i % 5) * 50}ms`} title={`${c.name} · ${c.level}`}>
-              <Image src={badge(c.file)} alt="" width={140} height={140} loading="lazy" />
-              <span class="b-name">{c.name}</span>
-              <span class="b-lvl mono">{c.level}</span>
+          certifications.map((c) => (
+            <li title={`${c.name} · ${c.level}`}>
+              <Image src={badge(c.file)} alt={`${c.name} ${c.level}`} width={128} height={128} loading="lazy" />
             </li>
           ))
         }
@@ -208,18 +134,20 @@ const stats = [
 
     <!-- Writing -->
     <section id="writing" class="section container">
-      <div class="sec-head">
-        <h2 data-reveal>Writing</h2>
-        <a class="mono link" href={socials[2].href} target="_blank" rel="noopener" data-reveal style="--d:80ms">All posts on Medium ↗</a>
-      </div>
-      <ul class="posts">
+      <header class="sec-head" data-reveal>
+        <span class="mono label">04</span>
+        <h2>Writing</h2>
+        <p class="sec-sub"><a href={medium.href} target="_blank" rel="noopener">All posts on Medium</a></p>
+      </header>
+      <ul class="table" data-reveal style="--d:80ms">
         {
-          posts.map((p, i) => (
-            <li data-reveal style={`--d:${i * 60}ms`}>
-              <a href={p.href} target="_blank" rel="noopener">
-                <span class="mono faint">{p.date}</span>
-                <span class="p-title">{p.title}</span>
-                <span class="p-arrow" aria-hidden="true">↗</span>
+          posts.map((p) => (
+            <li>
+              <a href={p.href} target="_blank" rel="noopener" class="row">
+                <span class="row-main">
+                  <span class="row-title">{p.title}</span>
+                </span>
+                <span class="row-meta mono"><span class="yrs">{p.date}</span></span>
               </a>
             </li>
           ))
@@ -228,33 +156,23 @@ const stats = [
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="section container contact">
-      <div class="contact-card" data-reveal>
-        <p class="kicker mono">Contact</p>
-        <h2>Let's <em>talk.</em></h2>
-        <p class="lede">Questions about cloud, platform engineering or security, or just want to say hi? My inbox is open.</p>
-        <div class="actions">
-          <a class="btn btn-solid" href={`mailto:${profile.email}`}>Email me</a>
-          <button class="btn" type="button" data-copy={profile.email}>Copy email</button>
-        </div>
-        <ul class="socials">
-          {
-            socials.map((s) => (
-              <li>
-                <a href={s.href} target="_blank" rel="noopener me">
-                  <span>{s.label}</span>
-                        </a>
-              </li>
-            ))
-          }
-        </ul>
+    <section id="contact" class="section container contact" data-reveal>
+      <h2>Let's build something.</h2>
+      <p>Open to conversations about cloud, platform and security engineering.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href={`mailto:${profile.email}`}>Email me</a>
+        <button class="btn" type="button" data-copy={profile.email}>
+          <span data-copy-label>Copy email</span>
+        </button>
       </div>
     </section>
   </main>
 
-  <footer class="container foot">
-    <span>© {new Date().getFullYear()} {profile.name}</span>
-    <a href="/architecture" class="mono">View as architecture diagram →</a>
+  <footer class="foot container">
+    <span class="mono">© {new Date().getFullYear()} {profile.name}</span>
+    <nav class="foot-links" aria-label="Social">
+      {socials.map((s) => <a href={s.href} target="_blank" rel="noopener me">{s.label}</a>)}
+    </nav>
   </footer>
 </Base>
 
@@ -267,842 +185,539 @@ const stats = [
           io.unobserve(e.target);
         }
       }),
-    { rootMargin: '0px 0px -6% 0px', threshold: 0.06 },
+    { rootMargin: '0px 0px -5% 0px', threshold: 0.05 },
   );
   document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
 
-  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((b) =>
+  const nav = document.querySelector('.nav')!;
+  const onScroll = () => nav.classList.toggle('scrolled', scrollY > 8);
+  onScroll();
+  addEventListener('scroll', onScroll, { passive: true });
+
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((b) => {
+    const label = b.querySelector('[data-copy-label]')!;
     b.addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(b.dataset.copy!);
-        b.textContent = 'Copied ✓';
-        setTimeout(() => (b.textContent = 'Copy email'), 1600);
+        label.textContent = 'Copied';
+        setTimeout(() => (label.textContent = 'Copy email'), 1600);
       } catch {
         location.href = `mailto:${b.dataset.copy}`;
       }
-    }),
-  );
+    });
+  });
 </script>
 
 <style>
-  .faint {
-    color: var(--faint);
+  /* Nav */
+  .nav {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    padding: 12px var(--gutter);
+    transition: background 0.3s;
   }
-  .section {
-    padding-block: clamp(72px, 11vw, 128px) 0;
-  }
-  .kicker {
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-size: 11.5px;
-  }
-  h2 {
-    font-size: clamp(34px, 5.2vw, 56px);
-    font-weight: 500;
-    line-height: 1.05;
-    letter-spacing: -0.035em;
-  }
-  h2 em {
-    font-size: 1.08em;
-    color: var(--accent);
-  }
-  .sec-head {
+  .nav-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    height: 52px;
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-bottom: clamp(28px, 4vw, 44px);
+    align-items: center;
+    gap: 24px;
+    padding: 0 8px 0 12px;
+    border-radius: 14px;
+    border: 1px solid transparent;
+    transition: background 0.3s, border-color 0.3s;
   }
-  .link {
+  .nav.scrolled .nav-inner {
+    background: rgba(14, 14, 17, 0.72);
+    border-color: var(--line);
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    font-size: 14.5px;
+  }
+  .mark {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--text);
+    color: #000;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .links {
+    margin-left: auto;
+    display: flex;
+    gap: 2px;
+  }
+  .links a {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 14px;
     color: var(--muted);
-    transition: color 0.2s;
+    transition: color 0.2s, background 0.2s;
   }
-  .link:hover {
-    color: var(--accent);
+  .links a:hover {
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .nav-cta {
+    padding: 7px 14px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 500;
+    background: var(--text);
+    color: #000;
+    transition: opacity 0.2s;
+  }
+  .nav-cta:hover {
+    opacity: 0.85;
   }
 
   /* Buttons */
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 48px;
-    padding: 0 22px;
-    border-radius: 999px;
-    border: 1px solid var(--line-strong);
-    background: transparent;
-    font-size: 15px;
+    height: 42px;
+    padding: 0 18px;
+    border-radius: 10px;
+    font-size: 14.5px;
     font-weight: 500;
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--line-strong);
     cursor: pointer;
-    transition: background 0.2s, border-color 0.2s, transform 0.2s var(--ease), color 0.2s;
+    transition: background 0.2s, border-color 0.2s;
   }
   .btn:hover {
-    border-color: var(--muted);
-    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.22);
   }
-  .btn-solid {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #1a0e02;
+  .btn-primary {
+    background: var(--text);
+    color: #000;
+    border-color: var(--text);
   }
-  .btn-solid:hover {
-    background: #ffb066;
-    border-color: #ffb066;
-  }
-  .actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+  .btn-primary:hover {
+    background: #fff;
+    border-color: #fff;
   }
 
   /* Hero */
   .hero {
-    display: grid;
-    grid-template-columns: 1.45fr 1fr;
-    align-items: center;
-    gap: clamp(32px, 6vw, 80px);
-    padding-top: clamp(112px, 16vh, 160px);
-    padding-bottom: clamp(48px, 7vw, 72px);
-  }
-  .status {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 6px 14px 6px 12px;
-    border-radius: 999px;
-    border: 1px solid var(--line-strong);
-    font-size: 13.5px;
-    color: var(--muted);
-  }
-  .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #4ade80;
-    box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.15);
-  }
-  h1 {
-    margin-top: 28px;
-    font-size: clamp(40px, 5.4vw, 72px);
-    font-weight: 500;
-    line-height: 1.02;
-    letter-spacing: -0.045em;
-  }
-  h1 em {
-    font-size: 1.1em;
-    color: var(--accent);
-    padding-right: 0.04em;
-  }
-  .lede {
-    margin-top: 24px;
-    max-width: 44ch;
-    font-size: clamp(17px, 1.8vw, 19px);
-    line-height: 1.55;
-    color: var(--muted);
-  }
-  .hero .actions {
-    margin-top: 32px;
-  }
-  .quick {
-    margin-top: 28px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 22px;
-    font-size: 14px;
-  }
-  .quick a {
-    color: var(--muted);
-    transition: color 0.2s;
-  }
-  .quick a:hover {
-    color: var(--text);
-  }
-
-  .hero-photo {
     position: relative;
-    margin: 0;
-    justify-self: end;
-    width: 100%;
-    max-width: 440px;
+    isolation: isolate;
+    min-height: min(100svh, 780px);
+    display: flex;
+    align-items: center;
+    padding: 120px 0 80px;
+    overflow: hidden;
   }
-  .hero-photo::before {
-    content: '';
+  .glow {
     position: absolute;
-    inset: 12% -8% -6% 10%;
+    left: 50%;
+    top: -260px;
+    width: min(900px, 140vw);
+    height: 520px;
+    translate: -50% 0;
     z-index: -1;
-    background: radial-gradient(closest-side, rgba(255, 154, 60, 0.28), transparent);
-    filter: blur(30px);
+    background: radial-gradient(closest-side, rgba(140, 160, 255, 0.16), transparent);
+    filter: blur(20px);
   }
-  .frame {
-    aspect-ratio: 4 / 5;
-    border-radius: 28px;
-    overflow: hidden;
-    background: #000;
-    border: 1px solid var(--line-strong);
-    transform: rotate(1.5deg);
-    transition: transform 0.6s var(--ease);
-  }
-  .hero-photo:hover .frame {
-    transform: rotate(0deg) scale(1.01);
-  }
-  .frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 50% 30%;
-  }
-  .chip {
-    position: absolute;
-    border-radius: 14px;
-    background: rgba(18, 18, 20, 0.78);
-    border: 1px solid var(--line-strong);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-  .chip-loc {
-    top: 20px;
-    left: -14px;
-    padding: 8px 12px;
-    color: var(--text);
-  }
-  .chip-now {
-    bottom: 26px;
-    right: -16px;
-    display: flex;
-    flex-direction: column;
-    padding: 12px 16px;
-    line-height: 1.3;
-  }
-  .chip-now span {
-    color: var(--muted);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-  .chip-now strong {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: 26px;
-    font-style: italic;
-  }
-
-  /* Stats */
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-  .stats li {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: 26px 20px;
-  }
-  .stats li + li {
-    border-left: 1px solid var(--line);
-  }
-  .stats li:first-child {
-    padding-left: 0;
-  }
-  .n {
-    font-family: var(--serif);
-    font-size: clamp(40px, 5vw, 56px);
-    line-height: 1;
-    letter-spacing: -0.02em;
-  }
-  .l {
-    font-size: 13.5px;
-    color: var(--muted);
-  }
-
-  /* About */
-  .about-grid {
-    margin-top: 20px;
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: clamp(28px, 6vw, 80px);
-    align-items: end;
-  }
-  .statement em {
-    color: var(--accent);
-  }
-  .about-body p {
-    color: var(--muted);
-    font-size: 16.5px;
-  }
-  .edu {
-    margin-top: 24px;
-    border-top: 1px solid var(--line);
-  }
-  .edu li {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 16px;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .edu a {
-    display: flex;
-    flex-direction: column;
-  }
-  .edu-deg {
-    font-weight: 500;
-  }
-  .edu a:hover .edu-deg {
-    color: var(--accent);
-  }
-  .edu-school {
-    font-size: 14px;
-    color: var(--muted);
-  }
-  .edu-yr {
-    color: var(--faint);
-    white-space: nowrap;
-  }
-
-  /* Career pipeline */
-  .pipe {
-    --inset: calc(100% / 12);
-    position: relative;
-  }
-  .stages {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 12px;
-  }
-  .pipe::before {
-    content: '';
-    position: absolute;
-    top: 7px;
-    left: var(--inset);
-    right: var(--inset);
-    height: 1px;
-    background: linear-gradient(90deg, var(--line-strong), var(--accent));
-  }
-  .packet {
-    position: absolute;
-    top: 5px;
-    left: var(--inset);
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 10px var(--accent);
-    animation: flow-x 6s linear infinite;
-    animation-delay: var(--d);
-  }
-  @keyframes flow-x {
-    0% {
-      left: var(--inset);
-      opacity: 0;
-    }
-    8%,
-    92% {
-      opacity: 1;
-    }
-    100% {
-      left: calc(100% - var(--inset));
-      opacity: 0;
-    }
-  }
-  .stage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-  }
-  .node {
-    position: relative;
-    z-index: 1;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background: var(--bg);
-    border: 1.5px solid var(--line-strong);
-  }
-  .now .node {
-    border-color: var(--accent);
-    background: var(--accent);
-    box-shadow: 0 0 0 5px var(--accent-soft);
-  }
-  .job {
-    position: relative;
-    width: 100%;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    padding: 18px 16px;
-    border-radius: 16px;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    transition: border-color 0.25s, transform 0.3s var(--ease), background 0.25s;
-  }
-  .job:hover {
-    border-color: var(--line-strong);
-    background: var(--surface-2);
-    transform: translateY(-3px);
-  }
-  .now .job {
-    border-color: rgba(255, 154, 60, 0.45);
-  }
-  .yrs {
-    color: var(--faint);
-    font-size: 11.5px;
-  }
-  .now .yrs {
-    color: var(--accent);
-  }
-  .co {
-    margin-top: 14px;
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-  }
-  .role {
-    font-size: 13.5px;
-    color: var(--muted);
-    line-height: 1.4;
-  }
-  .meta {
-    margin-top: auto;
-    padding-top: 14px;
-    font-size: 11px;
-    color: var(--faint);
-  }
-  .now-pill {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    padding: 2px 8px;
-    border-radius: 999px;
-    font-size: 10.5px;
-    color: #1a0e02;
-    background: var(--accent);
-  }
-
-  /* Work */
-  .sec-note {
-    margin: -16px 0 28px;
-    max-width: 60ch;
-    color: var(--muted);
-  }
-  .sec-note a {
-    color: var(--text);
-    border-bottom: 1px solid var(--line-strong);
-    transition: border-color 0.2s;
-  }
-  .sec-note a:hover {
-    border-color: var(--accent);
-  }
-  .work {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-  .card {
-    position: relative;
-    border-radius: var(--radius);
-    background: var(--surface);
-    border: 1px solid var(--line);
-    overflow: hidden;
-    transition: border-color 0.25s, transform 0.3s var(--ease), background 0.25s;
-  }
-  .card:hover {
-    border-color: var(--line-strong);
-    transform: translateY(-3px);
-  }
-  .proj {
-    display: flex;
-    flex-direction: column;
-    padding: 28px;
-    min-height: 250px;
-  }
-  .svc {
-    color: var(--faint);
-  }
-  .proj h3 {
-    margin-top: 36px;
-    font-size: 24px;
-    font-weight: 500;
-    letter-spacing: -0.025em;
-    line-height: 1.2;
-  }
-  .proj h3 em {
-    font-size: 1.1em;
-    color: var(--accent);
-  }
-  .blurb {
-    margin-top: 8px;
-    color: var(--muted);
-    font-size: 15px;
-    max-width: 40ch;
-  }
-  .langs {
-    margin-top: auto;
-    padding-top: 24px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .langs a {
-    padding: 7px 12px;
-    border-radius: 999px;
-    border: 1px solid var(--line-strong);
-    color: var(--text);
-    transition: border-color 0.2s, color 0.2s, background 0.2s;
-  }
-  .langs a:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: var(--accent-soft);
-  }
-  .arch {
-    padding: 0;
-    background:
-      radial-gradient(120% 90% at 100% 100%, rgba(255, 154, 60, 0.12), transparent 60%),
-      var(--surface);
-  }
-  .arch-link {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    padding: 28px;
-  }
-  .arch-cta {
-    margin-top: auto;
-    padding-top: 24px;
-    color: var(--accent);
-  }
-  .arch-art {
-    position: absolute;
-    right: 24px;
-    top: 24px;
-    width: 130px;
-    opacity: 0.55;
-    transition: opacity 0.3s;
-  }
-  .arch:hover .arch-art {
-    opacity: 1;
-  }
-  .arch-art path {
-    fill: none;
-    stroke: var(--line-strong);
-    stroke-width: 1.5;
-  }
-  .arch-art rect {
-    fill: var(--surface-2);
-    stroke: var(--muted);
-    stroke-width: 1;
-  }
-  .arch-art circle {
-    fill: var(--accent);
-  }
-
-  /* Badges */
-  .badges {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 12px;
-  }
-  .badges li {
+  .hero-inner {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 22px 10px 18px;
-    border-radius: 16px;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    transition: border-color 0.25s, background 0.25s;
   }
-  .badges li:hover {
-    border-color: var(--line-strong);
-    background: var(--surface-2);
-  }
-  .badges img {
-    width: 76px;
-    height: 76px;
-    transition: transform 0.4s var(--ease);
-  }
-  .badges li:hover img {
-    transform: translateY(-3px) scale(1.04);
-  }
-  .b-name {
-    margin-top: 14px;
-    font-size: 13px;
-    line-height: 1.3;
-  }
-  .b-lvl {
-    margin-top: 3px;
-    font-size: 10.5px;
-    color: var(--faint);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-
-  /* Writing */
-  .posts {
-    border-top: 1px solid var(--line);
-  }
-  .posts li {
-    border-bottom: 1px solid var(--line);
-  }
-  .posts a {
-    display: grid;
-    grid-template-columns: 120px 1fr auto;
-    align-items: center;
-    gap: 20px;
-    padding: 24px 0;
-  }
-  .p-title {
-    font-size: clamp(18px, 2.2vw, 24px);
-    letter-spacing: -0.02em;
-    transition: color 0.2s, transform 0.35s var(--ease);
-  }
-  .posts a:hover .p-title {
-    color: var(--accent);
-    transform: translateX(6px);
-  }
-  .p-arrow {
-    color: var(--faint);
-    transition: color 0.2s, transform 0.3s var(--ease);
-  }
-  .posts a:hover .p-arrow {
-    color: var(--accent);
-    transform: translate(3px, -3px);
-  }
-
-  /* Contact */
-  .contact-card {
-    position: relative;
-    overflow: hidden;
-    padding: clamp(36px, 7vw, 80px);
-    border-radius: 28px;
-    background:
-      radial-gradient(80% 120% at 100% 0%, rgba(255, 154, 60, 0.14), transparent 60%),
-      var(--surface);
-    border: 1px solid var(--line);
-  }
-  .contact-card h2 {
-    margin-top: 16px;
-    font-size: clamp(56px, 10vw, 120px);
-    letter-spacing: -0.05em;
-    line-height: 0.95;
-  }
-  .contact-card .actions {
-    margin-top: 32px;
-  }
-  .socials {
-    margin-top: 36px;
-    padding-top: 28px;
-    border-top: 1px solid var(--line);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .socials a {
+  .pill {
     display: inline-flex;
-    padding: 8px 16px;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 14px 4px 4px;
     border-radius: 999px;
     border: 1px solid var(--line-strong);
+    background: rgba(255, 255, 255, 0.03);
+    font-size: 13.5px;
+    color: var(--muted);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .pill:hover {
+    border-color: rgba(255, 255, 255, 0.24);
+    color: var(--text);
+  }
+  .pill > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  :global(.avatar) {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 22%;
+    background: #000;
+  }
+  .live {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--live);
+    box-shadow: 0 0 8px var(--live);
+  }
+  h1 {
+    margin-top: 28px;
+    font-size: clamp(48px, 10vw, 104px);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    background: linear-gradient(180deg, #ffffff 25%, #8d8d96 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding-bottom: 0.06em;
+  }
+  .lede {
+    margin-top: 22px;
+    max-width: 46ch;
+    font-size: clamp(16px, 2vw, 18px);
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  .hero .cta {
+    margin-top: 36px;
+  }
+
+  /* Sections */
+  .section {
+    padding-top: clamp(80px, 12vw, 128px);
+  }
+  .sec-head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: baseline;
+    column-gap: 14px;
+    margin-bottom: 24px;
+  }
+  .label {
+    color: var(--faint);
+  }
+  h2 {
+    font-size: clamp(22px, 3vw, 28px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+  }
+  .sec-sub {
+    grid-column: 2;
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 14.5px;
+  }
+  .sec-sub a {
+    color: var(--text);
+    border-bottom: 1px solid var(--line-strong);
+    transition: border-color 0.2s;
+  }
+  .sec-sub a:hover {
+    border-color: var(--text);
+  }
+
+  /* Table-style list */
+  .table {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    overflow: hidden;
+  }
+  .table li + li {
+    border-top: 1px solid var(--line);
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    transition: background 0.2s;
+  }
+  .row:hover {
+    background: var(--surface-hover);
+  }
+  .logo {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: 1px solid var(--line-strong);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+    font-weight: 600;
     font-size: 14px;
+    color: var(--text);
+  }
+  .row-main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .row-title {
+    font-weight: 500;
+    font-size: 15px;
+  }
+  .row-sub {
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .row-meta {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
+    color: var(--faint);
+  }
+  .row-yrs-m {
+    display: none;
+    margin-top: 4px;
+    color: var(--faint);
+  }
+  .now {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    color: var(--live);
+    background: rgba(61, 220, 151, 0.1);
+  }
+
+  /* Project cards */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 22px;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    transition: border-color 0.25s, background 0.25s;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 40%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  .card:hover {
+    border-color: var(--line-strong);
+    background: var(--surface-hover);
+  }
+  .tag {
+    color: var(--faint);
+  }
+  .card h3 {
+    margin-top: 28px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+  .card p {
+    margin-top: 6px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .langs {
+    margin-top: auto;
+    padding-top: 20px;
+    display: flex;
+    gap: 6px;
+  }
+  .langs a {
+    padding: 4px 10px;
+    border-radius: 7px;
+    border: 1px solid var(--line-strong);
     color: var(--muted);
     transition: color 0.2s, border-color 0.2s, background 0.2s;
   }
-  .socials a:hover {
-    color: var(--accent);
-    border-color: var(--accent);
-    background: var(--accent-soft);
+  .langs a:hover {
+    color: var(--text);
+    border-color: rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.05);
   }
 
+  /* Badges */
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .badges li {
+    display: grid;
+    place-items: center;
+    width: 84px;
+    height: 84px;
+    border-radius: 12px;
+    transition: background 0.25s;
+  }
+  .badges li:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .badges img {
+    width: 58%;
+    height: auto;
+    filter: saturate(0.6);
+    opacity: 0.8;
+    transition: filter 0.35s var(--ease), opacity 0.35s var(--ease), transform 0.35s var(--ease);
+  }
+  .badges li:hover img {
+    filter: none;
+    opacity: 1;
+    transform: scale(1.08);
+  }
+
+  /* Contact */
+  .contact {
+    text-align: center;
+    padding-bottom: clamp(80px, 12vw, 128px);
+  }
+  .contact h2 {
+    font-size: clamp(32px, 5.5vw, 52px);
+    letter-spacing: -0.045em;
+    line-height: 1.05;
+    background: linear-gradient(180deg, #ffffff 30%, #8d8d96 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding-bottom: 0.06em;
+  }
+  .contact p {
+    margin: 14px auto 0;
+    max-width: 40ch;
+    color: var(--muted);
+  }
+  .contact .cta {
+    margin-top: 28px;
+  }
+
+  /* Footer */
   .foot {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 12px;
     flex-wrap: wrap;
-    padding-block: 40px;
-    font-size: 14px;
-    color: var(--muted);
+    gap: 16px;
+    padding-block: 28px 40px;
+    border-top: 1px solid var(--line);
+    color: var(--faint);
   }
-  .foot a {
+  .foot-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    font-size: 13.5px;
+  }
+  .foot-links a {
     color: var(--muted);
     transition: color 0.2s;
   }
-  .foot a:hover {
-    color: var(--accent);
+  .foot-links a:hover {
+    color: var(--text);
   }
 
-  /* ---------- Responsive ---------- */
-  @media (max-width: 1000px) {
-    .badges {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-
-  @media (max-width: 900px) {
-    /* Pipeline becomes vertical */
-    .pipe {
-      padding-left: 30px;
-    }
-    .stages {
-      grid-template-columns: 1fr;
-      gap: 14px;
-    }
-    .pipe::before {
-      top: 24px;
-      bottom: 24px;
-      left: 7px;
-      right: auto;
-      width: 1px;
-      height: auto;
-      background: linear-gradient(180deg, var(--line-strong), var(--accent));
-    }
-    .packet {
-      left: 5px;
-      top: 24px;
-      animation-name: flow-y;
-    }
-    @keyframes flow-y {
-      0% {
-        top: 24px;
-        opacity: 0;
-      }
-      8%,
-      92% {
-        opacity: 1;
-      }
-      100% {
-        top: calc(100% - 24px);
-        opacity: 0;
-      }
-    }
-    .stage {
-      position: relative;
-      flex-direction: row;
-      align-items: center;
-    }
-    .node {
-      position: absolute;
-      left: -30px;
-    }
-    .job {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      grid-template-areas:
-        'co yrs'
-        'role role'
-        'meta meta';
-      padding: 16px 18px;
-    }
-    .co {
-      grid-area: co;
-      margin-top: 0;
-    }
-    .yrs {
-      grid-area: yrs;
-      align-self: center;
-    }
-    .role {
-      grid-area: role;
-    }
-    .meta {
-      grid-area: meta;
-      padding-top: 8px;
-    }
-    .now-pill {
-      top: -9px;
-      right: 14px;
-    }
-    .about-grid {
+  /* Responsive */
+  @media (max-width: 760px) {
+    .cards {
       grid-template-columns: 1fr;
     }
+    .card h3 {
+      margin-top: 18px;
+    }
   }
-
-  @media (max-width: 860px) {
+  @media (max-width: 640px) {
+    .links {
+      display: none;
+    }
+    .nav-cta {
+      margin-left: auto;
+    }
+    .br {
+      display: none;
+    }
     .hero {
-      grid-template-columns: 1fr;
-      padding-top: 104px;
+      min-height: auto;
+      padding: 120px 0 24px;
     }
-    .hero-photo {
-      justify-self: center;
-      max-width: 340px;
-      margin-top: 8px;
+    .hero .cta .btn:first-child {
+      flex-basis: 100%;
     }
-    .frame {
-      aspect-ratio: 1;
-    }
-    .chip-loc {
-      left: -6px;
-    }
-    .chip-now {
-      right: -6px;
-    }
-    .stats {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .stats li:nth-child(3) {
-      border-left: 0;
-      padding-left: 0;
-    }
-    .stats li:nth-child(n + 3) {
-      border-top: 1px solid var(--line);
-    }
-    .work {
-      grid-template-columns: 1fr;
-    }
-    .proj {
-      min-height: 0;
-    }
-    .proj h3 {
-      margin-top: 24px;
-    }
-    .arch-art {
-      width: 100px;
-    }
-  }
-
-  @media (max-width: 560px) {
-    .badges {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-    }
-    .badges li {
-      padding: 16px 6px 14px;
-    }
-    .badges img {
-      width: 56px;
-      height: 56px;
-    }
-    .b-name {
-      font-size: 11.5px;
-    }
-    .posts a {
-      grid-template-columns: 1fr auto;
-      gap: 4px 16px;
-      padding: 20px 0;
-    }
-    .posts a > .mono {
-      grid-column: 1;
-    }
-    .p-title {
-      grid-column: 1;
-      grid-row: 2;
-    }
-    .p-arrow {
-      grid-column: 2;
-      grid-row: 1 / span 2;
-    }
-    .actions .btn {
+    .hero .cta .btn {
       flex: 1;
     }
-    .stats li {
-      padding: 20px 14px;
+    .row {
+      padding: 14px 16px;
+      align-items: flex-start;
+    }
+    .row-meta {
+      align-self: center;
+    }
+    .table .row-yrs-m {
+      display: block;
+    }
+    #experience .row-meta .yrs {
+      display: none;
+    }
+    .section {
+      padding-top: 72px;
+    }
+    .badges {
+      padding: 12px 8px;
+      gap: 2px;
+    }
+    .badges li {
+      width: 19%;
+      height: auto;
+      aspect-ratio: 1;
+    }
+    .badges img {
+      width: 70%;
+    }
+    .foot {
+      flex-direction: column-reverse;
+      align-items: flex-start;
     }
   }
 </style>
